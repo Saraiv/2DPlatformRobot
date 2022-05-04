@@ -1,0 +1,5 @@
+Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"P:/Escola/SegundoSemestre/Jogos/2DPlatformerRobot/Content/gear.png","P:/Escola/SegundoSemestre/Jogos/2DPlatformerRobot/Content/bin/DesktopGL/gear.xnb","TextureProcessor","Texture2DContent",7085,518485,1,1963723
+"P:/Escola/SegundoSemestre/Jogos/2DPlatformerRobot/Content/robot-idle.gif","P:/Escola/SegundoSemestre/Jogos/2DPlatformerRobot/Content/bin/DesktopGL/robot-idle.xnb","TextureProcessor","Texture2DContent",16573,409685,0,0345404
+"P:/Escola/SegundoSemestre/Jogos/2DPlatformerRobot/Content/robot-preview.png","P:/Escola/SegundoSemestre/Jogos/2DPlatformerRobot/Content/bin/DesktopGL/robot-preview.xnb","TextureProcessor","Texture2DContent",1638,409685,0,0409861
+"P:/Escola/SegundoSemestre/Jogos/2DPlatformerRobot/Content/robot-run.gif","P:/Escola/SegundoSemestre/Jogos/2DPlatformerRobot/Content/bin/DesktopGL/robot-run.xnb","TextureProcessor","Texture2DContent",17009,409685,0,0317277
