@@ -1,4 +1,5 @@
-﻿using _2DPlatformerRobot.Screens;
+﻿using _2DPlatformerRobot.Manager;
+using _2DPlatformerRobot.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -13,6 +14,7 @@ namespace _2DPlatformerRobot
         private SpriteBatch _spriteBatch;
         Texture2D playerModelRobot;
         private ScreenManager _screenManager;
+        KeyboardManager _km;
 
         public Game1()
         {
@@ -24,11 +26,8 @@ namespace _2DPlatformerRobot
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            _graphics.PreferredBackBufferWidth = screenWidth;
-            _graphics.PreferredBackBufferHeight = screenHeight;
-            _graphics.ApplyChanges();
-
             _screenManager = new ScreenManager();
+            _km = new KeyboardManager();
 
             base.Initialize();
         }
@@ -41,6 +40,11 @@ namespace _2DPlatformerRobot
 
 
             // TODO: use this.Content to load your game content here
+
+            _graphics.PreferredBackBufferWidth = screenWidth;
+            _graphics.PreferredBackBufferHeight = screenHeight;
+            _graphics.ApplyChanges();
+
             _screenManager.SetScreen(new SplashScreen(playerModelRobot));
             _screenManager.SwitchScreen();
 

@@ -1,7 +1,8 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using _2DPlatformerRobot.Screens;
 
-namespace _2DPlatformerRobot.Screens
+namespace _2DPlatformerRobot.Manager
 {
     class ScreenManager
     {
@@ -25,12 +26,12 @@ namespace _2DPlatformerRobot.Screens
 
         public void Update(float delta)
         {
-            _activeScreen.Update(delta);
+            _activeScreen?.Update(delta);
         }
         
         public void Draw(SpriteBatch spriteBatch)
         {
-            _activeScreen.Draw(spriteBatch);
+            _activeScreen?.Draw(spriteBatch);
         }
     }
 }
