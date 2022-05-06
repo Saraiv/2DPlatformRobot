@@ -1,4 +1,5 @@
 ﻿using _2DPlatformerRobot.Manager;
+using _2DPlatformerRobot.Models;
 using _2DPlatformerRobot.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -13,6 +14,9 @@ namespace _2DPlatformerRobot
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         Texture2D playerModelRobot;
+        private Rectangle robotRectangle;
+        private Rectangle screenRectangle;
+        Robot player;
         private ScreenManager _screenManager;
         KeyboardManager _km;
 
@@ -36,8 +40,17 @@ namespace _2DPlatformerRobot
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            screenRectangle = new Rectangle(0, 0, screenWidth, screenHeight);
+
+            robotRectangle.X = 40;
+            robotRectangle.Y = screenHeight - 100;
+
+            robotRectangle.Width = 100;
+            robotRectangle.Height = 100;
+
             playerModelRobot = Content.Load<Texture2D>("robot-idle");
 
+            player = new Robot(_km, _spriteBatch, playerModelRobot, robotRectangle);
 
             // TODO: use this.Content to load your game content here
 
@@ -45,7 +58,8 @@ namespace _2DPlatformerRobot
             _graphics.PreferredBackBufferHeight = screenHeight;
             _graphics.ApplyChanges();
 
-            _screenManager.SetScreen(new SplashScreen(playerModelRobot));
+            //_screenManager.SetScreen(new SplashScreen(playerModelRobot));
+            _screenManager.SetScreen(new GameScreen(playerModelRobot));
             _screenManager.SwitchScreen();
 
         }
@@ -56,6 +70,10 @@ namespace _2DPlatformerRobot
                 Exit();
 
             // TODO: Add your update logic here
+            _km.Update();
+            player.Movement();
+
+
             float delta = (float)gameTime.ElapsedGameTime.TotalMilliseconds / 1000f;
 
             _screenManager.Update(delta);
@@ -69,6 +87,7 @@ namespace _2DPlatformerRobot
 
             // TODO: Add your drawing code here
             _screenManager.Draw(_spriteBatch);
+            player.Draw();
 
             base.Draw(gameTime);
         }
