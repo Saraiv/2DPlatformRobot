@@ -17,6 +17,7 @@ namespace _2DPlatformerRobot
         private Rectangle robotRectangle;
         private Rectangle screenRectangle;
         Robot player;
+        Background background;
         private ScreenManager _screenManager;
         KeyboardManager _km;
 
@@ -41,6 +42,8 @@ namespace _2DPlatformerRobot
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             screenRectangle = new Rectangle(0, 0, screenWidth, screenHeight);
+            background = new Background(Content, "backgroundFactory", screenRectangle);
+
 
             robotRectangle.X = 40;
             robotRectangle.Y = screenHeight - 100;
@@ -48,9 +51,7 @@ namespace _2DPlatformerRobot
             robotRectangle.Width = 100;
             robotRectangle.Height = 100;
 
-            playerModelRobot = Content.Load<Texture2D>("robot-idle");
-
-            player = new Robot(_km, _spriteBatch, playerModelRobot, robotRectangle);
+            player = new Robot(_km, _spriteBatch, Content, "robot-idle", robotRectangle);
 
             // TODO: use this.Content to load your game content here
 
@@ -87,6 +88,7 @@ namespace _2DPlatformerRobot
 
             // TODO: Add your drawing code here
             _screenManager.Draw(_spriteBatch);
+            background.Draw(_spriteBatch);
             player.Draw();
 
             base.Draw(gameTime);

@@ -4,12 +4,14 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
+    <File>P:/Escola/SegundoSemestre/Jogos/2DPlatformerRobot/Content/backgroundFactory.jpg</File>
     <File>P:/Escola/SegundoSemestre/Jogos/2DPlatformerRobot/Content/gear.png</File>
     <File>P:/Escola/SegundoSemestre/Jogos/2DPlatformerRobot/Content/robot-idle.gif</File>
     <File>P:/Escola/SegundoSemestre/Jogos/2DPlatformerRobot/Content/robot-preview.png</File>
     <File>P:/Escola/SegundoSemestre/Jogos/2DPlatformerRobot/Content/robot-run.gif</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

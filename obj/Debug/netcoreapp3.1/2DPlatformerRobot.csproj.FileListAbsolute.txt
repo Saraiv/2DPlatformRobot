@@ -26,3 +26,4 @@ P:\Escola\SegundoSemestre\Jogos\2DPlatformerRobot\obj\Debug\netcoreapp3.1\2DPlat
 P:\Escola\SegundoSemestre\Jogos\2DPlatformerRobot\obj\Debug\netcoreapp3.1\2DPlatformerRobot.dll
 P:\Escola\SegundoSemestre\Jogos\2DPlatformerRobot\obj\Debug\netcoreapp3.1\2DPlatformerRobot.pdb
 P:\Escola\SegundoSemestre\Jogos\2DPlatformerRobot\obj\Debug\netcoreapp3.1\2DPlatformerRobot.genruntimeconfig.cache
+P:\Escola\SegundoSemestre\Jogos\2DPlatformerRobot\bin\Debug\netcoreapp3.1\Content\backgroundFactory.xnb

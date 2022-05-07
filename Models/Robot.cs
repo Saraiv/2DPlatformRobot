@@ -11,15 +11,16 @@ namespace _2DPlatformerRobot.Models
         private Texture2D robotTexture;
         private KeyboardManager km;
         private SpriteBatch spriteBatch;
+        private ContentManager content;
         private Rectangle robotRectangle;
-        private Vector2 velocity;
         bool hasJumped;
 
-        public Robot(KeyboardManager km, SpriteBatch spriteBatch, Texture2D robotTexture, Rectangle robotRectangle)
+        public Robot(KeyboardManager km, SpriteBatch spriteBatch, ContentManager content, string robotImage, Rectangle robotRectangle)
         {
             this.km = km;
             this.spriteBatch = spriteBatch;
-            this.robotTexture = robotTexture;
+            this.content = content;
+            robotTexture = content.Load<Texture2D>(robotImage);
             this.robotRectangle = robotRectangle;
             hasJumped = false;
         }
@@ -28,26 +29,19 @@ namespace _2DPlatformerRobot.Models
         {
             if (km.IsKeyHeld(Keys.A) || km.IsKeyHeld(Keys.Left))
             {
-                robotRectangle.X -= 2;
+                robotRectangle.X -= 3;
             }
             if (km.IsKeyHeld(Keys.D) || km.IsKeyHeld(Keys.Right))
             {
-                robotRectangle.X += 2;
+                robotRectangle.X += 3;
             }
             if (km.IsKeyPressed(Keys.Space) && hasJumped == false)
             {
-                robotRectangle.Y -= 10;
-                velocity.Y -= 5;
+                robotRectangle.Y -= 100;
                 hasJumped = true;
             }
-            if (hasJumped)
-            {
-                float i = 1;
-                velocity.Y += 0.15f * i;
-            }
-            if (robotRectangle.Y + robotTexture.Height >= 450) hasJumped = false;
-            if (hasJumped == false) velocity.Y = 0;
 
+            hasJumped = false;
         }
 
         public void Draw()
