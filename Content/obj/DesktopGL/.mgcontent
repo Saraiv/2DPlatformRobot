@@ -9,8 +9,12 @@
     <File>P:/Escola/SegundoSemestre/Jogos/2DPlatformerRobot/Content/robot-idle.gif</File>
     <File>P:/Escola/SegundoSemestre/Jogos/2DPlatformerRobot/Content/robot-preview.png</File>
     <File>P:/Escola/SegundoSemestre/Jogos/2DPlatformerRobot/Content/robot-run.gif</File>
+    <File>P:/Escola/SegundoSemestre/Jogos/2DPlatformerRobot/Content/Sprites/Grass.png</File>
+    <File>P:/Escola/SegundoSemestre/Jogos/2DPlatformerRobot/Content/Sprites/robot.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

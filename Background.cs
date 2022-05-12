@@ -6,21 +6,21 @@ namespace _2DPlatformerRobot
 {
     class Background
     {
-        Texture2D background;
-        float width, height;
-        Rectangle screenRectangle;
+        //Texture2D background;
+        //float width, height;
+        //Rectangle screenRectangle;
 
         public Background(ContentManager content, string backgroundImage, Rectangle screenRectangle)
         {
-            background = content.Load<Texture2D>(backgroundImage);
-            this.screenRectangle = screenRectangle;
+            //background = content.Load<Texture2D>(backgroundImage);
+            //this.screenRectangle = screenRectangle;
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Begin();
-            spriteBatch.Draw(background, screenRectangle, Color.White);
-            spriteBatch.End();
+            //spriteBatch.Begin();
+            //spriteBatch.Draw(background, screenRectangle, Color.White);
+            //spriteBatch.End();
         }
     }
 }

@@ -12,48 +12,71 @@ namespace _2DPlatformerRobot.Models
         private KeyboardManager km;
         private SpriteBatch spriteBatch;
         private ContentManager content;
-        private Rectangle robotRectangle;
-        bool hasJumped;
+        private GraphicsDevice graphicsDevice;
+        private int screenHeight;
+        private bool isOnGround = true;
+        private bool singleJump = true;
+        private const int playerVelocity = 100;
 
-        public Robot(KeyboardManager km, SpriteBatch spriteBatch, ContentManager content, string robotImage, Rectangle robotRectangle)
+        private const int SecsToMaxJump = 1;
+        private float timeOffGround = 0;
+        private bool maxJumped = false;
+
+        private Vector2 position;
+
+        public Robot(KeyboardManager km, SpriteBatch spriteBatch, ContentManager content, int screenHeight, GraphicsDevice graphicsDevice)
         {
             this.km = km;
             this.spriteBatch = spriteBatch;
             this.content = content;
-            robotTexture = content.Load<Texture2D>(robotImage);
-            this.robotRectangle = robotRectangle;
-            hasJumped = false;
+            robotTexture = content.Load<Texture2D>("Sprites/robot");
+            this.screenHeight = screenHeight;
+            this.graphicsDevice = graphicsDevice;
         }
 
-        public void Movement()
+        public void SetPlayerPos(Vector2 startingPos)
+        {
+            this.position = startingPos;
+        }
+
+        private void Movement(GameTime gameTime)
         {
             if (km.IsKeyHeld(Keys.A) || km.IsKeyHeld(Keys.Left))
             {
-                robotRectangle.X -= 3;
-            }
-            if (km.IsKeyHeld(Keys.D) || km.IsKeyHeld(Keys.Right))
-            {
-                robotRectangle.X += 3;
-            }
-            if (km.IsKeyPressed(Keys.Space) && hasJumped == false)
-            {
-                robotRectangle.Y -= 100;
-                hasJumped = true;
+                position = position + new Vector2(-2, 0) * (float)gameTime.ElapsedGameTime.TotalSeconds * playerVelocity;
             }
 
-            hasJumped = false;
+            if (km.IsKeyHeld(Keys.D) || km.IsKeyHeld(Keys.Right))
+            {
+                position = position + new Vector2(2, 0) * (float)gameTime.ElapsedGameTime.TotalSeconds * playerVelocity;
+            }
+
+            if (km.IsKeyHeld(Keys.Space)) //!maxJumped !singleJump
+            {
+                position = position + new Vector2(0, 2) * (float)gameTime.ElapsedGameTime.TotalSeconds * playerVelocity;
+                isOnGround = false;
+            }
+
+            if(!isOnGround)
+                position = position + new Vector2(0, -1) * (float)gameTime.ElapsedGameTime.TotalSeconds * playerVelocity;
+
+            //isOnGround = true;
+            
+        }
+
+        Vector2 ConvertToDrawPos(Vector2 pos)
+        {
+            return new Vector2(graphicsDevice.Viewport.Width / 2 + pos.X, graphicsDevice.Viewport.Height - pos.Y);
         }
 
         public void Draw()
         {
-            spriteBatch.Begin();
-            spriteBatch.Draw(robotTexture, robotRectangle, Color.White);
-            spriteBatch.End();
+            spriteBatch.Draw(robotTexture, ConvertToDrawPos(position), Color.White);
         }
 
-        public void Update()
+        public void Update(GameTime gameTime)
         {
-
+            Movement(gameTime);
         }
     }
 }

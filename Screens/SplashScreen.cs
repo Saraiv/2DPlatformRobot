@@ -14,20 +14,20 @@ namespace _2DPlatformerRobot.Screens
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Begin();
+            //spriteBatch.Begin();
 
-            var zero = new Vector2(splashScreenImage.Width / 2f, splashScreenImage.Height / 2f);
+            //var zero = new Vector2(splashScreenImage.Width / 2f, splashScreenImage.Height / 2f);
 
-            spriteBatch.Draw(splashScreenImage,
-                new Vector2(Game1.screenWidth / 2f, Game1.screenHeight / 2f),
-                null,
-                Color.White,
-                0f,
-                zero,
-                1f,
-                SpriteEffects.None,
-                0f);
-            spriteBatch.End();
+            //spriteBatch.Draw(splashScreenImage,
+            //    new Vector2(Game1.screenWidth / 2f, Game1.screenHeight / 2f),
+            //    null,
+            //    Color.White,
+            //    0f,
+            //    zero,
+            //    1f,
+            //    SpriteEffects.None,
+            //    0f);
+            //spriteBatch.End();
         }
 
         public void Update(float delta)
