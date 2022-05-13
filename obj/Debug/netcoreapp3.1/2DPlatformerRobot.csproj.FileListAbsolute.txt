@@ -29,3 +29,12 @@ P:\Escola\SegundoSemestre\Jogos\2DPlatformerRobot\obj\Debug\netcoreapp3.1\2DPlat
 P:\Escola\SegundoSemestre\Jogos\2DPlatformerRobot\bin\Debug\netcoreapp3.1\Content\backgroundFactory.xnb
 P:\Escola\SegundoSemestre\Jogos\2DPlatformerRobot\bin\Debug\netcoreapp3.1\Content\Sprites\Grass.xnb
 P:\Escola\SegundoSemestre\Jogos\2DPlatformerRobot\bin\Debug\netcoreapp3.1\Content\Sprites\robot.xnb
+P:\Escola\SegundoSemestre\Jogos\2DPlatformerRobot\bin\Debug\netcoreapp3.1\Content\Sprites\backgroundFactory.xnb
+P:\Escola\SegundoSemestre\Jogos\2DPlatformerRobot\bin\Debug\netcoreapp3.1\Content\Sprites\gear.xnb
+P:\Escola\SegundoSemestre\Jogos\2DPlatformerRobot\bin\Debug\netcoreapp3.1\Content\Sprites\pngdb-coins-sprite-animation-2d-computer-graphics-coin-opengameart-org-png-iVSwgdcuJ7B9jp1Zsk16Ebxzg_t.xnb
+P:\Escola\SegundoSemestre\Jogos\2DPlatformerRobot\bin\Debug\netcoreapp3.1\Content\Sprites\robot-idle.xnb
+P:\Escola\SegundoSemestre\Jogos\2DPlatformerRobot\bin\Debug\netcoreapp3.1\Content\Sprites\robot-preview.xnb
+P:\Escola\SegundoSemestre\Jogos\2DPlatformerRobot\bin\Debug\netcoreapp3.1\Content\Sprites\robot-run.xnb
+P:\Escola\SegundoSemestre\Jogos\2DPlatformerRobot\bin\Debug\netcoreapp3.1\Content\Sprites\Wall.xnb
+P:\Escola\SegundoSemestre\Jogos\2DPlatformerRobot\bin\Debug\netcoreapp3.1\Content\Sprites\robotLeft.xnb
+P:\Escola\SegundoSemestre\Jogos\2DPlatformerRobot\bin\Debug\netcoreapp3.1\Content\Sprites\robotRight.xnb

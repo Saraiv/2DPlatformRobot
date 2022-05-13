@@ -3,10 +3,11 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using _2DPlatformerRobot.Collider;
 
 namespace _2DPlatformerRobot.Models
 {
-    class Robot
+    class Robot : ICollider
     {
         private Texture2D robotTexture;
         private KeyboardManager km;
@@ -29,7 +30,7 @@ namespace _2DPlatformerRobot.Models
             this.km = km;
             this.spriteBatch = spriteBatch;
             this.content = content;
-            robotTexture = content.Load<Texture2D>("Sprites/robot");
+            robotTexture = content.Load<Texture2D>("Sprites/robotRight");
             this.screenHeight = screenHeight;
             this.graphicsDevice = graphicsDevice;
         }
@@ -37,6 +38,7 @@ namespace _2DPlatformerRobot.Models
         public void SetPlayerPos(Vector2 startingPos)
         {
             this.position = startingPos;
+            isOnGround = true;
         }
 
         private void Movement(GameTime gameTime)
@@ -44,11 +46,13 @@ namespace _2DPlatformerRobot.Models
             if (km.IsKeyHeld(Keys.A) || km.IsKeyHeld(Keys.Left))
             {
                 position = position + new Vector2(-2, 0) * (float)gameTime.ElapsedGameTime.TotalSeconds * playerVelocity;
+                robotTexture = content.Load<Texture2D>("Sprites/robotLeft");
             }
 
             if (km.IsKeyHeld(Keys.D) || km.IsKeyHeld(Keys.Right))
             {
                 position = position + new Vector2(2, 0) * (float)gameTime.ElapsedGameTime.TotalSeconds * playerVelocity;
+                robotTexture = content.Load<Texture2D>("Sprites/robotRight");
             }
 
             if (km.IsKeyHeld(Keys.Space)) //!maxJumped !singleJump
@@ -59,14 +63,31 @@ namespace _2DPlatformerRobot.Models
 
             if(!isOnGround)
                 position = position + new Vector2(0, -1) * (float)gameTime.ElapsedGameTime.TotalSeconds * playerVelocity;
-
-            //isOnGround = true;
-            
         }
 
         Vector2 ConvertToDrawPos(Vector2 pos)
         {
             return new Vector2(graphicsDevice.Viewport.Width / 2 + pos.X, graphicsDevice.Viewport.Height - pos.Y);
+        }
+
+        public string Name() => "Player";
+
+        public void CollisionWith(ICollider other)
+        {
+            if(other.Name() == "Wall")
+            {
+                
+            }
+        }
+
+        public bool CollidesWith(ICollider other)
+        {
+            return other.CollidesWith(this);
+        }
+
+        public ICollider GetCollider()
+        {
+            return this;
         }
 
         public void Draw()
