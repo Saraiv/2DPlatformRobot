@@ -1,3 +1,2 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"P:/Escola/SegundoSemestre/Jogos/2DPlatformerRobot/Content/Sprites/robotLeft.png","P:/Escola/SegundoSemestre/Jogos/2DPlatformerRobot/Content/bin/DesktopGL/Sprites/robotLeft.xnb","TextureProcessor","Texture2DContent",1105,16469,0,2943527
-"P:/Escola/SegundoSemestre/Jogos/2DPlatformerRobot/Content/Sprites/robotRight.png","P:/Escola/SegundoSemestre/Jogos/2DPlatformerRobot/Content/bin/DesktopGL/Sprites/robotRight.xnb","TextureProcessor","Texture2DContent",1095,16469,0,0059422
+"P:/Escola/SegundoSemestre/Jogos/2DPlatformerRobot/Content/Sprites/gear.png","P:/Escola/SegundoSemestre/Jogos/2DPlatformerRobot/Content/bin/DesktopGL/Sprites/gear.xnb","TextureProcessor","Texture2DContent",7085,16469,0,2879288

@@ -4,34 +4,34 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using _2DPlatformerRobot.Collider;
+using System.Collections.Generic;
 
 namespace _2DPlatformerRobot.Models
 {
-    class Robot : ICollider
+    //class Robot : ICollider
+    class Robot : Sprite
     {
         private Texture2D robotTexture;
         private KeyboardManager km;
         private SpriteBatch spriteBatch;
         private ContentManager content;
         private GraphicsDevice graphicsDevice;
-        private int screenHeight;
         private bool isOnGround = true;
-        private bool singleJump = true;
         private const int playerVelocity = 100;
 
-        private const int SecsToMaxJump = 1;
-        private float timeOffGround = 0;
-        private bool maxJumped = false;
+
+        //Jump
+        private const int mSecsToMaxJump = 500;
+        private double timeOffGround = 0;
 
         private Vector2 position;
 
-        public Robot(KeyboardManager km, SpriteBatch spriteBatch, ContentManager content, int screenHeight, GraphicsDevice graphicsDevice)
+        public Robot(Texture2D robotTexture, KeyboardManager km, SpriteBatch spriteBatch, ContentManager content, GraphicsDevice graphicsDevice) : base(robotTexture)
         {
             this.km = km;
             this.spriteBatch = spriteBatch;
             this.content = content;
-            robotTexture = content.Load<Texture2D>("Sprites/robotRight");
-            this.screenHeight = screenHeight;
+            this.robotTexture = robotTexture;
             this.graphicsDevice = graphicsDevice;
         }
 
@@ -55,49 +55,58 @@ namespace _2DPlatformerRobot.Models
                 robotTexture = content.Load<Texture2D>("Sprites/robotRight");
             }
 
-            if (km.IsKeyHeld(Keys.Space)) //!maxJumped !singleJump
+            if (km.IsKeyHeld(Keys.Space) && timeOffGround < mSecsToMaxJump)
             {
-                position = position + new Vector2(0, 2) * (float)gameTime.ElapsedGameTime.TotalSeconds * playerVelocity;
+                position = position + new Vector2(0, 4) * (float)gameTime.ElapsedGameTime.TotalSeconds * playerVelocity;
                 isOnGround = false;
             }
 
-            if(!isOnGround)
-                position = position + new Vector2(0, -1) * (float)gameTime.ElapsedGameTime.TotalSeconds * playerVelocity;
+            if (isOnGround)
+                timeOffGround = 0;
+            else
+                timeOffGround += gameTime.ElapsedGameTime.TotalMilliseconds;
+
+            if (!isOnGround)
+                position += new Vector2(0, -1) * (float)gameTime.ElapsedGameTime.TotalSeconds * playerVelocity;
         }
 
-        Vector2 ConvertToDrawPos(Vector2 pos)
+        public Vector2 ConvertToDrawPos(Vector2 pos)
         {
             return new Vector2(graphicsDevice.Viewport.Width / 2 + pos.X, graphicsDevice.Viewport.Height - pos.Y);
         }
 
-        public string Name() => "Player";
-
-        public void CollisionWith(ICollider other)
-        {
-            if(other.Name() == "Wall")
-            {
-                
-            }
-        }
-
-        public bool CollidesWith(ICollider other)
-        {
-            return other.CollidesWith(this);
-        }
-
-        public ICollider GetCollider()
-        {
-            return this;
-        }
 
         public void Draw()
         {
             spriteBatch.Draw(robotTexture, ConvertToDrawPos(position), Color.White);
         }
 
-        public void Update(GameTime gameTime)
+        public void Update(GameTime gameTime, List<Sprite> textures)
         {
             Movement(gameTime);
+
+            foreach(var texture in textures)
+            {
+                if(texture == this)
+                {
+                    continue;
+                }
+
+                if(this.velocity.X > 0 && this.IsTouchingLeft(texture) ||
+                    this.velocity.X < 0 && this.IsTouchingRight(texture))
+                {
+                    this.velocity.X = 0;
+                }
+
+                if (this.velocity.Y > 0 && this.IsTouchingTop(texture) ||
+                    this.velocity.Y < 0 && this.IsTouchingBottom(texture))
+                {
+                    this.velocity.Y = 0;
+                }
+            }
+
+            position += velocity;
+            velocity = Vector2.Zero;
         }
     }
 }

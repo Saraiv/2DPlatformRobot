@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>P:/Escola/SegundoSemestre/Jogos/2DPlatformerRobot/Content/Sprites/backgroundFactory.jpg</SourceFile>
-  <SourceTime>2022-05-07T13:43:17.7419544+01:00</SourceTime>
-  <DestFile>P:/Escola/SegundoSemestre/Jogos/2DPlatformerRobot/Content/bin/DesktopGL/Sprites/backgroundFactory.xnb</DestFile>
-  <DestTime>2022-05-13T10:18:27.7549364+01:00</DestTime>
+  <SourceFile>P:/Escola/SegundoSemestre/Jogos/2DPlatformerRobot/Content/Sprites/Lava.png</SourceFile>
+  <SourceTime>2022-05-13T10:13:04.9989435+01:00</SourceTime>
+  <DestFile>P:/Escola/SegundoSemestre/Jogos/2DPlatformerRobot/Content/bin/DesktopGL/Sprites/Lava.xnb</DestFile>
+  <DestTime>2022-05-13T10:18:27.8110105+01:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T17:17:54+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

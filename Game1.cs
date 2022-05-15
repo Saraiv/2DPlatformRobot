@@ -14,10 +14,12 @@ namespace _2DPlatformerRobot
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         KeyboardManager _km;
+        private List<Sprite> textures;
 
         //robot
         Vector2 playerPos;
         Robot player;
+        Texture2D robotTexture;
 
         //map
         LevelManager levelManager;
@@ -25,9 +27,10 @@ namespace _2DPlatformerRobot
         public const int tileSize = 64;
         int screenHeight, screenWidth;
         List<Vector2> objectivePointsPos;
+        Wall wall;
         Texture2D wallTexture;
-
-        public List<ICollider> colliders;
+        Texture2D lavaTexture;
+        Texture2D gearTexture;
 
         public Game1()
         {
@@ -48,17 +51,24 @@ namespace _2DPlatformerRobot
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+            textures = new List<Sprite>();
 
-            player = new Robot(_km, _spriteBatch, Content, screenHeight, GraphicsDevice);
+            robotTexture = Content.Load<Texture2D>("Sprites/robotRight");
+            
+            player = new Robot(robotTexture, _km, _spriteBatch, Content, GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
             wallTexture = Content.Load<Texture2D>("Sprites/Wall");
+            lavaTexture = Content.Load<Texture2D>("Sprites/Lava");
+            gearTexture = Content.Load<Texture2D>("Sprites/gear");
 
-            colliders = new List<ICollider>();
-            colliders.Add(player);
+            wall = new Wall(wallTexture);
 
-            levelManager.LoadLevel(ref screenWidth, ref screenHeight, ref map, tileSize, ref objectivePointsPos, _graphics, _spriteBatch, Content, ref playerPos);
+            levelManager.LoadLevel(ref screenWidth, ref screenHeight, ref map, tileSize, ref objectivePointsPos, _graphics, _spriteBatch, Content, ref playerPos, wall);
             player.SetPlayerPos(playerPos);
+
+            textures.Add(player);
+            textures.Add(wall);
         }
 
         protected override void Update(GameTime gameTime)
@@ -67,24 +77,19 @@ namespace _2DPlatformerRobot
                 Exit();
 
             // TODO: Add your update logic here
-            _km.Update();
-            player.Update(gameTime);
 
-            for (int i = 0; i < colliders.Count - 1; i++)
+            foreach (var texture in textures)
             {
-                for (int j = i + 1; j < colliders.Count; j++)
-                {
-                    if (colliders[i].CollidesWith(colliders[j]))
-                    {
-                        colliders[i].CollisionWith(colliders[j]);
-                        colliders[j].CollisionWith(colliders[i]);
-                    }
-                }
+                texture.Update(gameTime, textures);
             }
+
+            _km.Update();
+            player.Update(gameTime, textures);
+            wall.Update(gameTime, textures);
 
             if (_km.IsKeyPressed(Keys.R))
             {
-                levelManager.LoadLevel(ref screenWidth, ref screenHeight, ref map, tileSize, ref objectivePointsPos, _graphics, _spriteBatch, Content, ref playerPos);
+                levelManager.LoadLevel(ref screenWidth, ref screenHeight, ref map, tileSize, ref objectivePointsPos, _graphics, _spriteBatch, Content, ref playerPos, wall);
                 player.SetPlayerPos(playerPos);
             }
 
@@ -99,18 +104,31 @@ namespace _2DPlatformerRobot
             
             _spriteBatch.Begin();
             for (int x = 0; x < screenWidth; x++)
+            {
                 for (int y = 0; y < screenHeight; y++)
                 {
                     char currentSymbol = map[x, y];
                     switch (currentSymbol)
                     {
                         case 'X':
-                            _spriteBatch.Draw(wallTexture, new Vector2(x, y) * tileSize, Color.White);
+                            wall.Draw(_spriteBatch, new Vector2(x, y) * tileSize); 
+                            //_spriteBatch.Draw(wallTexture, new Vector2(x, y) * tileSize, Color.White);
                             break;
+                        case 'l':
+                            _spriteBatch.Draw(lavaTexture, new Vector2(x, y) * tileSize, Color.White);
+                            break;
+                        case 'c':
+                            _spriteBatch.Draw(gearTexture, new Vector2(x, y) * tileSize, Color.White);
+                            break;  
                         default:
                             break;
                     }
                 }
+            }
+
+            //foreach (var texture in textures)
+            //    texture.Draw(_spriteBatch);
+
             player.Draw();
             _spriteBatch.End();
 

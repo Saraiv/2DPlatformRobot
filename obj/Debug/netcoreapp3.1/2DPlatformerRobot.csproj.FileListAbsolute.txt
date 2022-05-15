@@ -38,3 +38,4 @@ P:\Escola\SegundoSemestre\Jogos\2DPlatformerRobot\bin\Debug\netcoreapp3.1\Conten
 P:\Escola\SegundoSemestre\Jogos\2DPlatformerRobot\bin\Debug\netcoreapp3.1\Content\Sprites\Wall.xnb
 P:\Escola\SegundoSemestre\Jogos\2DPlatformerRobot\bin\Debug\netcoreapp3.1\Content\Sprites\robotLeft.xnb
 P:\Escola\SegundoSemestre\Jogos\2DPlatformerRobot\bin\Debug\netcoreapp3.1\Content\Sprites\robotRight.xnb
+P:\Escola\SegundoSemestre\Jogos\2DPlatformerRobot\bin\Debug\netcoreapp3.1\Content\Sprites\Lava.xnb
