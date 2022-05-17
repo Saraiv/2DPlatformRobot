@@ -14,10 +14,6 @@ namespace _2DPlatformerRobot
         public SpriteBatch spriteBatch;
         public KeyboardManager km;
 
-        //textures
-        public List<Sprite> textures;
-        public int currentLevel;
-
         //robot
         Robot player;
 
@@ -25,6 +21,7 @@ namespace _2DPlatformerRobot
         public string[] levels = { "../../../Content/Level/level1.txt",
                             "../../../Content/Level/level2.txt"};
         LevelManager levelManager;
+        public int currentLevel = 1;
         public List<Wall> walls;
 
         public Game1()
@@ -47,58 +44,32 @@ namespace _2DPlatformerRobot
 
         protected override void LoadContent()
         {
-
             // TODO: use this.Content to load your game content here
             spriteBatch = new SpriteBatch(GraphicsDevice);
             levelManager.LoadLevelTextures();
             player.LoadTexture();
-            
-            
-            //player.SetPlayerPos(playerPos);
-            //textures.Add(player);
-            //foreach(var wall in walls)
-            //    textures.Add(wall);
         }
 
         protected override void Update(GameTime gameTime)
         {
-            
-
             // TODO: Add your update logic here
-
             km.Update();
-
             if (km.IsKeyPressed(Keys.R))
                 Initialize();
-
             if (km.IsKeyPressed(Keys.Escape))
                 Exit();
-
-            player.Update(gameTime, textures);
-
-
-            //player.Update(gameTime, textures);
-            //foreach (var wall in walls)
-            //    wall.Update(gameTime, textures);
-
-            //foreach (var texture in textures)
-            //    texture.Update(gameTime, textures);
-
-
-
+            player.Update(gameTime);
 
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.MediumPurple);
-
             // TODO: Add your drawing code here
-            
+            GraphicsDevice.Clear(Color.MediumPurple);
             spriteBatch.Begin();
-            player.Draw(spriteBatch);
             levelManager.Draw(spriteBatch);
+            player.Draw(spriteBatch);
             spriteBatch.End();
 
             base.Draw(gameTime);

@@ -5,18 +5,22 @@ using System.Collections.Generic;
 
 namespace _2DPlatformerRobot.Models
 {
-    public class Wall : Sprite
+    public class Wall
     {
-        Texture2D wallTexture;
+        Game1 game;
+        public Vector2 position;
+        public int tileSize = 64;
 
-        public Wall(Texture2D wallTexture)
+        public Wall(Game1 game, Vector2 position)
         {
-            this.wallTexture = wallTexture;
+            this.game = game;
+            this.position = position;
         }
-
-        public void Draw(SpriteBatch spriteBatch, Vector2 position)
+            
+        //Collisions
+        public bool IsColliding(Vector2 position)
         {
-            spriteBatch.Draw(wallTexture, position, Color.White);
+            return Vector2.Distance(this.position, position) < tileSize;
         }
     }
 }
