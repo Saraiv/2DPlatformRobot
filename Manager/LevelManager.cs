@@ -11,51 +11,85 @@ namespace _2DPlatformerRobot.Manager
 {
     class LevelManager
     {
-        string[] levels = { "../../../Content/Level/level1.txt" };
-        //int currentLevel;
-        private Texture2D wallTexture;
-        private Texture2D lavaTexture;
-        private Texture2D gearTexture;
+        Game1 game;
 
-        public void LoadLevel(ref int screenWidth, ref int screenHeight, ref char[,] map, int tileSize, ref List<Vector2> objectivePointsPos, GraphicsDeviceManager graphics, SpriteBatch spriteBatch, ContentManager content, ref Vector2 playerPos, Wall wall)
+        private Texture2D wallTexture, lavaTexture, gearTexture;
+        private List<Wall> walls;
+        private char[,] map;
+        private int screenWidth, screenHeight;
+        public int tileSize = 64;
+
+        public Robot player;
+
+        public LevelManager(Game1 game, string[] levelFile)
         {
-            //if (currentLevel >= levels.Length) return;
+            this.game = game;
+            walls = new List<Wall>();
 
-            string[] lines = File.ReadAllLines(levels[0]); //levels[currentLevel]
+            if (game.currentLevel >= levelFile.Length) return;
+
+            string[] lines = File.ReadAllLines(levelFile[1]);
             map = new char[lines[0].Length, lines.Length];
 
-            wallTexture = content.Load<Texture2D>("Sprites/Wall");
-            lavaTexture = content.Load<Texture2D>("Sprites/Lava");
-            gearTexture = content.Load<Texture2D>("Sprites/gear");
-
-            spriteBatch.Begin();
-            Rectangle position = new Rectangle(0, 0, Game1.tileSize, Game1.tileSize);
+            Rectangle position = new Rectangle(0, 0, tileSize, tileSize);
             for (int x = 0; x < lines[0].Length; x++)
                 for (int y = 0; y < lines.Length; y++)
                 {
-                    position.X = x * Game1.tileSize;
-                    position.Y = y * Game1.tileSize;
+                    position.X = x * tileSize;
+                    position.Y = y * tileSize;
 
                     string currentLine = lines[y];
                     map[x, y] = currentLine[x];
-                    if (currentLine[x] == 'i')
-                        playerPos = new Vector2(x - Game1.tileSize * 9, y + Game1.tileSize * 2);
                     if (currentLine[x] == 'X')
-                        wall.Draw(spriteBatch, new Vector2(x, y) * Game1.tileSize);
-                        //spriteBatch.Draw(wallTexture, position, Color.White);
-                    if (currentLine[x] == 'l')
-                        spriteBatch.Draw(lavaTexture, position, Color.White);
-                    if (currentLine[x] == 'c')
-                        spriteBatch.Draw(gearTexture, position, Color.White);
+                        walls.Add(new Wall(wallTexture));
+                    if (currentLine[x] == 'l') { }
+                    if (currentLine[x] == 'c') { }
+                    if (currentLine[x] == 'i')
+                        Robot._instance.position = new Vector2(x, y);
+
+
+                    screenHeight = lines.Length;
+                    screenWidth = lines[0].Length;
+
+                    game.graphics.PreferredBackBufferHeight = screenHeight * tileSize;
+                    game.graphics.PreferredBackBufferWidth = screenWidth * tileSize;
+                    game.graphics.ApplyChanges();
+
+
                 }
+        }
 
-            spriteBatch.End();
-            screenHeight = lines.Length;
-            screenWidth = lines[0].Length;
+        public void LoadLevelTextures()
+        {
+            wallTexture = game.Content.Load<Texture2D>("Sprites/Wall");
+            lavaTexture = game.Content.Load<Texture2D>("Sprites/Lava");
+            gearTexture = game.Content.Load<Texture2D>("Sprites/gear");
+        }
 
-            graphics.PreferredBackBufferHeight = screenHeight * tileSize;
-            graphics.PreferredBackBufferWidth = screenWidth * tileSize;
-            graphics.ApplyChanges();
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            foreach (var wall in walls)
+                for (int x = 0; x < screenWidth; x++)
+                {
+                    for (int y = 0; y < screenHeight; y++)
+                    {
+                        char currentSymbol = map[x, y];
+                        switch (currentSymbol)
+                        {
+                            case 'X':
+                                spriteBatch.Draw(wallTexture, new Vector2(x, y) * tileSize, Color.White);
+                                break;
+                            case 'l':
+                                spriteBatch.Draw(lavaTexture, new Vector2(x, y) * tileSize, Color.White);
+                                break;
+                            case 'c':
+                                spriteBatch.Draw(gearTexture, new Vector2(x, y) * tileSize, Color.White);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
         }
     }
 }

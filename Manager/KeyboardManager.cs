@@ -6,7 +6,7 @@ using System.Text;
 
 namespace _2DPlatformerRobot.Manager
 {
-    class KeyboardManager
+    public class KeyboardManager
     {
         private static KeyboardManager instance;
         enum KeyState

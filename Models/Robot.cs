@@ -5,34 +5,41 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using _2DPlatformerRobot.Collider;
 using System.Collections.Generic;
+using System;
 
 namespace _2DPlatformerRobot.Models
 {
-    //class Robot : ICollider
     class Robot : Sprite
     {
+        private Game1 game;
+
         private Texture2D robotTexture;
-        private KeyboardManager km;
-        private SpriteBatch spriteBatch;
-        private ContentManager content;
-        private GraphicsDevice graphicsDevice;
-        private bool isOnGround = true;
-        private const int playerVelocity = 100;
+        private Vector2 futurePos;
+        public static Robot _instance;
 
 
         //Jump
-        private const int mSecsToMaxJump = 500;
+        private bool isOnGround = true;
+        private const int mSecsToMaxJump = 1300;
         private double timeOffGround = 0;
 
-        private Vector2 position;
+        enum Direction{
+            Left,
+            Right
+        }
 
-        public Robot(Texture2D robotTexture, KeyboardManager km, SpriteBatch spriteBatch, ContentManager content, GraphicsDevice graphicsDevice) : base(robotTexture)
+        public Robot(Game1 game)
         {
-            this.km = km;
-            this.spriteBatch = spriteBatch;
-            this.content = content;
-            this.robotTexture = robotTexture;
-            this.graphicsDevice = graphicsDevice;
+            if(_instance != null) throw new Exception("Player cons called twice");
+            _instance = this;
+            this.game = game;
+
+            position = Vector2.Zero;
+        }
+
+        public void LoadTexture()
+        {
+            robotTexture = game.Content.Load<Texture2D>("Sprites/robotRight");
         }
 
         public void SetPlayerPos(Vector2 startingPos)
@@ -43,21 +50,21 @@ namespace _2DPlatformerRobot.Models
 
         private void Movement(GameTime gameTime)
         {
-            if (km.IsKeyHeld(Keys.A) || km.IsKeyHeld(Keys.Left))
+            velocity = Vector2.Zero;
+
+            if (game.km.IsKeyHeld(Keys.A) || game.km.IsKeyHeld(Keys.Left))
             {
-                position = position + new Vector2(-2, 0) * (float)gameTime.ElapsedGameTime.TotalSeconds * playerVelocity;
-                robotTexture = content.Load<Texture2D>("Sprites/robotLeft");
+                velocity.X = -speed - 1f;
             }
 
-            if (km.IsKeyHeld(Keys.D) || km.IsKeyHeld(Keys.Right))
+            if (game.km.IsKeyHeld(Keys.D) || game.km.IsKeyHeld(Keys.Right))
             {
-                position = position + new Vector2(2, 0) * (float)gameTime.ElapsedGameTime.TotalSeconds * playerVelocity;
-                robotTexture = content.Load<Texture2D>("Sprites/robotRight");
+                velocity.X = speed + 1f;
             }
 
-            if (km.IsKeyHeld(Keys.Space) && timeOffGround < mSecsToMaxJump)
+            if (game.km.IsKeyHeld(Keys.Space) && timeOffGround < mSecsToMaxJump)
             {
-                position = position + new Vector2(0, 4) * (float)gameTime.ElapsedGameTime.TotalSeconds * playerVelocity;
+                velocity.Y = speed;
                 isOnGround = false;
             }
 
@@ -66,47 +73,47 @@ namespace _2DPlatformerRobot.Models
             else
                 timeOffGround += gameTime.ElapsedGameTime.TotalMilliseconds;
 
-            if (!isOnGround)
-                position += new Vector2(0, -1) * (float)gameTime.ElapsedGameTime.TotalSeconds * playerVelocity;
+            if (!isOnGround && timeOffGround > 1300)
+            {
+                velocity.Y = -speed;
+                timeOffGround -= gameTime.ElapsedGameTime.TotalMilliseconds;
+            }
+
+            futurePos = position + velocity;
         }
 
         public Vector2 ConvertToDrawPos(Vector2 pos)
         {
-            return new Vector2(graphicsDevice.Viewport.Width / 2 + pos.X, graphicsDevice.Viewport.Height - pos.Y);
+            return new Vector2(game.GraphicsDevice.Viewport.Width / 2 + pos.X, game.GraphicsDevice.Viewport.Height - pos.Y);
         }
 
 
-        public void Draw()
+        public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(robotTexture, ConvertToDrawPos(position), Color.White);
         }
 
-        public void Update(GameTime gameTime, List<Sprite> textures)
+        public override void Update(GameTime gameTime, List<Sprite> textures)
         {
             Movement(gameTime);
 
-            foreach(var texture in textures)
-            {
-                if(texture == this)
-                {
-                    continue;
-                }
-
-                if(this.velocity.X > 0 && this.IsTouchingLeft(texture) ||
-                    this.velocity.X < 0 && this.IsTouchingRight(texture))
-                {
-                    this.velocity.X = 0;
-                }
-
-                if (this.velocity.Y > 0 && this.IsTouchingTop(texture) ||
-                    this.velocity.Y < 0 && this.IsTouchingBottom(texture))
-                {
-                    this.velocity.Y = 0;
-                }
-            }
-
-            position += velocity;
-            velocity = Vector2.Zero;
+            if (CanMove(textures)) position = futurePos;
+            
         }
+
+        public bool CanMove(List<Sprite> textures)
+        {
+            if (textures == null) return true;
+            foreach(Sprite s in textures)
+            {
+                if(s.IsColliding(futurePos)) return false;
+            }
+            return true;
+        }
+
+        //public bool IsGrounded()
+        //{
+
+        //}
     }
 }
