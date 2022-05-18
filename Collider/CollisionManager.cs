@@ -16,10 +16,5 @@ namespace _2DPlatformerRobot.Collider
                 instance = this;
             }
         }
-
-        //public static bool isColiding(Sprite spriteUm, Sprite spriteDois)
-        //{
-        //    if(spriteUm.position)
-        //}
     }
 }

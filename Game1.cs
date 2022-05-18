@@ -21,8 +21,7 @@ namespace _2DPlatformerRobot
         public string[] levels = { "../../../Content/Level/level1.txt",
                             "../../../Content/Level/level2.txt"};
         LevelManager levelManager;
-        public int currentLevel = 1;
-        public List<Wall> walls;
+        public int currentLevel = 0;
 
         public Game1()
         {
@@ -62,6 +61,8 @@ namespace _2DPlatformerRobot
 
             base.Update(gameTime);
         }
+
+        public void IsDead() =>  Initialize();
 
         protected override void Draw(GameTime gameTime)
         {

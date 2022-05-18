@@ -1,27 +1,20 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
+using System.Text;
 
-namespace _2DPlatformerRobot.Collider
+namespace _2DPlatformerRobot.Models
 {
-    public class Sprite
+    class Coins
     {
+        Game1 game;
         public Vector2 position;
         public int tileSize = 64;
 
-        public Sprite()
+        public Coins(Game1 game, Vector2 position)
         {
-
-        }
-
-        public virtual void Update(GameTime gameTime, List<Sprite> spriteList)
-        {
-
-        }
-
-        public void Draw(SpriteBatch spriteBatch)
-        {
-
+            this.game = game;
+            this.position = position;
         }
 
         //Collisions

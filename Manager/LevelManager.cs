@@ -12,9 +12,10 @@ namespace _2DPlatformerRobot.Manager
     class LevelManager
     {
         Game1 game;
-
         private Texture2D wallTexture, lavaTexture, gearTexture;
         private List<Wall> walls;
+        private List<Lava> lavas;
+        private List<Coins> coins;
         private char[,] map;
         private int screenWidth, screenHeight;
         public int tileSize = 64;
@@ -25,6 +26,8 @@ namespace _2DPlatformerRobot.Manager
         {
             this.game = game;
             walls = new List<Wall>();
+            lavas = new List<Lava>();
+            coins = new List<Coins>();
 
             if (game.currentLevel >= levelFile.Length) return;
 
@@ -50,10 +53,10 @@ namespace _2DPlatformerRobot.Manager
                             walls.Add(new Wall(game, new Vector2(x * tileSize, y * tileSize)));
                             break;
                         case 'l':
-
+                            lavas.Add(new Lava(game, new Vector2(x * tileSize, y * tileSize)));
                             break;
                         case 'c':
-
+                            coins.Add(new Coins(game, new Vector2(x * tileSize, y * tileSize)));
                             break;
                         case 'i':
                             Robot._instance.SetPlayerPos(new Vector2(x * tileSize, y * tileSize)); //x - tileSize * 9, y + tileSize * 2
@@ -65,6 +68,8 @@ namespace _2DPlatformerRobot.Manager
             }
 
             Robot._instance.walls = walls;
+            Robot._instance.lavas = lavas;
+            Robot._instance.coins = coins;
 
             screenHeight = lines.Length;
             screenWidth = lines[0].Length;
