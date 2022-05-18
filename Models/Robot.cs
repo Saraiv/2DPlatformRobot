@@ -35,6 +35,7 @@ namespace _2DPlatformerRobot.Models
         private const float mSecsToMaxJump = 1000;
         private double timeOffGround = 0;
         public bool isOnGround = true;
+        public int nJumps = 0;
         
 
         public Robot(Game1 game)
@@ -62,61 +63,31 @@ namespace _2DPlatformerRobot.Models
 
         private void Movement(GameTime gameTime)
         {
-            velocity = Vector2.Zero;
+
+            if (!isOnGround)
+                velocity = (velocity + Vector2.UnitY * 2f);
+            else nJumps = 0;
+
+            velocity = velocity * 0.53f;
 
             if (game.km.IsKeyHeld(Keys.A) || game.km.IsKeyHeld(Keys.Left))
             {
-                velocity.X = -speed;
+                velocity.X += -speed / 2f;
             }
 
             if (game.km.IsKeyHeld(Keys.D) || game.km.IsKeyHeld(Keys.Right))
             {
-                velocity.X = speed;
+                velocity.X += speed / 2f;
             }
 
-            //if (game.km.IsKeyHeld(Keys.Space) && timeOffGround < mSecsToMaxJump)
-            //{
-            //    velocity.Y = -speed * 2f;
-            //    timeOffGround += gameTime.ElapsedGameTime.TotalSeconds;
-            //    playerState = RobotState.Jumping;
-            //}
-
-            //if (playerState == RobotState.Jumping)
-            //{
-            //    velocity.Y = speed / 2f;
-            //    timeOffGround -= gameTime.ElapsedGameTime.TotalSeconds;
-            //    if (timeOffGround < 0)
-            //        playerState = RobotState.Standing;
-            //}
-            //else
-            //    playerState = RobotState.Falling;
-
-            //if(playerState == RobotState.Falling)
-            //{
-            //    velocity.Y = speed / 2f;
-            //    timeOffGround -= gameTime.ElapsedGameTime.TotalSeconds;
-            //    if (timeOffGround < 0)
-            //        playerState = RobotState.Standing;
-            //}
-
-            if (game.km.IsKeyHeld(Keys.Space) && timeOffGround < mSecsToMaxJump)
+            if (game.km.IsKeyPressed(Keys.Space) && (isOnGround || nJumps < 2))
             {
-                velocity.Y = -speed;
+                velocity += new Vector2(velocity.X, -40f);
+                nJumps++;
                 isOnGround = false;
             }
 
-            if (isOnGround)
-                timeOffGround = 0;
-            else
-                timeOffGround += gameTime.ElapsedGameTime.TotalMilliseconds;
-
-            if (game.km.IsKeyUp(Keys.Space) || !isOnGround && timeOffGround > 1000)
-            {
-                velocity.Y = speed;
-                timeOffGround -= gameTime.ElapsedGameTime.TotalMilliseconds;
-            }
-
-            futurePos = position + velocity;
+            futurePos = position + velocity; // gravity
         }
 
         public void Draw(SpriteBatch spriteBatch)

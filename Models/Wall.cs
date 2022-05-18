@@ -17,7 +17,7 @@ namespace _2DPlatformerRobot.Models
             this.position = position;
         }
             
-        //Collisions
+        //Collisions all sides
         public bool IsColliding(Vector2 position)
         {
             return Vector2.Distance(this.position, position) < tileSize;
