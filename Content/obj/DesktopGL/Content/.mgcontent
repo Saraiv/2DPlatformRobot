@@ -4,8 +4,9 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
+    <File>P:/Escola/SegundoSemestre/Jogos/2DPlatformerRobot/Content/Fonts/Score.spritefont</File>
     <File>P:/Escola/SegundoSemestre/Jogos/2DPlatformerRobot/Content/Sprites/backgroundFactory.jpg</File>
-    <File>P:/Escola/SegundoSemestre/Jogos/2DPlatformerRobot/Content/Sprites/gear.png</File>
+    <File>P:/Escola/SegundoSemestre/Jogos/2DPlatformerRobot/Content/Sprites/coin.png</File>
     <File>P:/Escola/SegundoSemestre/Jogos/2DPlatformerRobot/Content/Sprites/Grass.png</File>
     <File>P:/Escola/SegundoSemestre/Jogos/2DPlatformerRobot/Content/Sprites/Lava.png</File>
     <File>P:/Escola/SegundoSemestre/Jogos/2DPlatformerRobot/Content/Sprites/pngdb-coins-sprite-animation-2d-computer-graphics-coin-opengameart-org-png-iVSwgdcuJ7B9jp1Zsk16Ebxzg_t.jpg</File>
@@ -14,6 +15,7 @@
     <File>P:/Escola/SegundoSemestre/Jogos/2DPlatformerRobot/Content/Sprites/Wall.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

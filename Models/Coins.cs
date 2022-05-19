@@ -1,11 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace _2DPlatformerRobot.Models
 {
-    class Coins
+    public class Coins
     {
         Game1 game;
         public Vector2 position;
@@ -20,7 +18,12 @@ namespace _2DPlatformerRobot.Models
         //Collisions
         public bool IsColliding(Vector2 position)
         {
-            return Vector2.Distance(this.position, position) < tileSize;
+            return Vector2.Distance(this.position, position) < tileSize - 10f;
+        }
+
+        public void Draw(SpriteBatch spriteBatch, Texture2D coinTexture)
+        {
+            spriteBatch.Draw(coinTexture, position, Color.White);
         }
     }
 }

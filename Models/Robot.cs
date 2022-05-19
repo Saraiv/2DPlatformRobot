@@ -1,11 +1,9 @@
-﻿using _2DPlatformerRobot.Manager;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Content;
+﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using _2DPlatformerRobot.Collider;
 using System.Collections.Generic;
 using System;
+using _2DPlatformerRobot.Manager;
 
 namespace _2DPlatformerRobot.Models
 {
@@ -30,10 +28,10 @@ namespace _2DPlatformerRobot.Models
         public List<Wall> walls;
         public List<Lava> lavas;
         public List<Coins> coins;
+        public int points = 0;
+        public int tileSize = 64;
 
         //Jump
-        private const float mSecsToMaxJump = 1000;
-        private double timeOffGround = 0;
         public bool isOnGround = true;
         public int nJumps = 0;
         
@@ -63,12 +61,11 @@ namespace _2DPlatformerRobot.Models
 
         private void Movement(GameTime gameTime)
         {
-
             if (!isOnGround)
                 velocity = (velocity + Vector2.UnitY * 2f);
             else nJumps = 0;
 
-            velocity = velocity * 0.53f;
+            velocity *= 0.4f;
 
             if (game.km.IsKeyHeld(Keys.A) || game.km.IsKeyHeld(Keys.Left))
             {
@@ -82,12 +79,12 @@ namespace _2DPlatformerRobot.Models
 
             if (game.km.IsKeyPressed(Keys.Space) && (isOnGround || nJumps < 2))
             {
-                velocity += new Vector2(velocity.X, -40f);
+                velocity += new Vector2(velocity.X, -30f);
                 nJumps++;
                 isOnGround = false;
             }
 
-            futurePos = position + velocity; // gravity
+            futurePos = position + velocity;
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -105,7 +102,8 @@ namespace _2DPlatformerRobot.Models
             if (IsDead(lavas))
                 game.IsDead();
 
-            //if(CoinPickUp(coins))
+            if (CoinPickUp(coins))
+                points++;
 
         }
 
@@ -116,7 +114,6 @@ namespace _2DPlatformerRobot.Models
             {
                 if (wall.IsColliding(futurePos))
                 {
-                    //playerState = RobotState.Standing;
                     isOnGround = true;
                     return false;
                 }
@@ -142,16 +139,28 @@ namespace _2DPlatformerRobot.Models
             {
                 if (coin.IsColliding(futurePos))
                 {
-                    //Unload texture
+                    game.levelManager.map[(int)coin.position.X / tileSize, (int)coin.position.Y / tileSize] = ' ';
                     return true;
                 }
             }
             return false;
         }
 
+        public Coins GetCoin(List<Coins> coins)
+        {
+            if (coins == null) return null;
+            foreach (var coin in coins)
+            {
+                if (coin.IsColliding(futurePos))
+                {
+                    return coin;
+                }
+            }
+            return null;
+        }
+
         public bool IsGrounded()
         {
-            //if (playerState == RobotState.Standing) return true;
             if (isOnGround) return true;
             return false;
         }

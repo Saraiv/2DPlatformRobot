@@ -9,27 +9,28 @@ using System.Text;
 
 namespace _2DPlatformerRobot.Manager
 {
-    class LevelManager
+    public class LevelManager
     {
         Game1 game;
-        private Texture2D wallTexture, lavaTexture, gearTexture;
-        private List<Wall> walls;
-        private List<Lava> lavas;
-        private List<Coins> coins;
-        private char[,] map;
-        private int screenWidth, screenHeight;
+        public Texture2D wallTexture, lavaTexture, coinTexture;
+        public List<Wall> walls;
+        public List<Lava> lavas;
+        public List<Coins> coins;
+        public Coins selectedCoin;
+        public char[,] map;
+        public int screenWidth, screenHeight;
         public int tileSize = 64;
-
-        public Robot player;
 
         public LevelManager(Game1 game, string[] levelFile)
         {
             this.game = game;
+
+            if (game.currentLevel >= levelFile.Length) return;
+
             walls = new List<Wall>();
             lavas = new List<Lava>();
             coins = new List<Coins>();
-
-            if (game.currentLevel >= levelFile.Length) return;
+            Robot._instance.points = 0;
 
             string[] lines = File.ReadAllLines(levelFile[game.currentLevel]);
             map = new char[lines[0].Length, lines.Length];
@@ -59,7 +60,7 @@ namespace _2DPlatformerRobot.Manager
                             coins.Add(new Coins(game, new Vector2(x * tileSize, y * tileSize)));
                             break;
                         case 'i':
-                            Robot._instance.SetPlayerPos(new Vector2(x * tileSize, y * tileSize)); //x - tileSize * 9, y + tileSize * 2
+                            Robot._instance.SetPlayerPos(new Vector2(x * tileSize, y * tileSize));
                             break;
                         default:
                             break;
@@ -79,11 +80,42 @@ namespace _2DPlatformerRobot.Manager
             game.graphics.ApplyChanges();
         }
 
+        public bool NextLevel()
+        {
+            if (Robot._instance.points == 5) return true;
+            else return false;
+        }
+        
+
         public void LoadLevelTextures()
         {
             wallTexture = game.Content.Load<Texture2D>("Sprites/Wall");
             lavaTexture = game.Content.Load<Texture2D>("Sprites/Lava");
-            gearTexture = game.Content.Load<Texture2D>("Sprites/gear");
+            coinTexture = game.Content.Load<Texture2D>("Sprites/Coin");
+        }
+
+        public void UnloadTexture()
+        {
+            for (int x = 0; x < screenWidth; x++)
+            {
+                for (int y = 0; y < screenHeight; y++)
+                {
+                    char currentSymbol = map[x, y];
+                    switch (currentSymbol)
+                    {
+                        case 'c':
+                            if (Robot._instance.CoinPickUp(coins))
+                            {
+                                selectedCoin = Robot._instance.GetCoin(coins);
+                                coins.Remove(selectedCoin);
+                                break;
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -102,7 +134,7 @@ namespace _2DPlatformerRobot.Manager
                             spriteBatch.Draw(lavaTexture, new Vector2(x, y) * tileSize, Color.White);
                             break;
                         case 'c':
-                            spriteBatch.Draw(gearTexture, new Vector2(x, y) * tileSize, Color.White);
+                            spriteBatch.Draw(coinTexture, new Vector2(x, y) * tileSize, Color.White);
                             break;
                         default:
                             break;

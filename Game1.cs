@@ -1,6 +1,7 @@
 ﻿using _2DPlatformerRobot.Collider;
 using _2DPlatformerRobot.Manager;
 using _2DPlatformerRobot.Models;
+using _2DPlatformerRobot.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -20,7 +21,8 @@ namespace _2DPlatformerRobot
         //map
         public string[] levels = { "../../../Content/Level/level1.txt",
                             "../../../Content/Level/level2.txt"};
-        LevelManager levelManager;
+        public LevelManager levelManager;
+        public Score score;
         public int currentLevel = 0;
 
         public Game1()
@@ -37,6 +39,7 @@ namespace _2DPlatformerRobot
         {
             // TODO: Add your initialization logic here
             levelManager = new LevelManager(this, levels);
+            score = new Score(this);
 
             base.Initialize();
         }
@@ -58,6 +61,12 @@ namespace _2DPlatformerRobot
             if (km.IsKeyPressed(Keys.Escape))
                 Exit();
             player.Update(gameTime);
+            if (levelManager.NextLevel())
+            {
+                currentLevel++;
+                Initialize();
+            }
+            levelManager.UnloadTexture();
 
             base.Update(gameTime);
         }
@@ -70,6 +79,7 @@ namespace _2DPlatformerRobot
             GraphicsDevice.Clear(Color.MediumPurple);
             spriteBatch.Begin();
             levelManager.Draw(spriteBatch);
+            score.Draw(spriteBatch);
             player.Draw(spriteBatch);
             spriteBatch.End();
 
