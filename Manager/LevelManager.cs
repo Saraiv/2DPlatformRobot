@@ -1,4 +1,5 @@
 ﻿using _2DPlatformerRobot.Models;
+using _2DPlatformerRobot.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -12,6 +13,8 @@ namespace _2DPlatformerRobot.Manager
     public class LevelManager
     {
         Game1 game;
+        public Score score;
+        public Health health;
         public Texture2D wallTexture, lavaTexture, coinTexture;
         public List<Wall> walls;
         public List<Lava> lavas;
@@ -30,6 +33,8 @@ namespace _2DPlatformerRobot.Manager
             walls = new List<Wall>();
             lavas = new List<Lava>();
             coins = new List<Coins>();
+            score = new Score(game);
+            health = new Health(game);
             Robot._instance.points = 0;
 
             string[] lines = File.ReadAllLines(levelFile[game.currentLevel]);
@@ -82,10 +87,13 @@ namespace _2DPlatformerRobot.Manager
 
         public bool NextLevel()
         {
-            if (Robot._instance.points == 5) return true;
+            if (Robot._instance.points == 5)
+            {
+                game.currentLevel++;
+                return true;
+            } 
             else return false;
         }
-        
 
         public void LoadLevelTextures()
         {
@@ -141,6 +149,10 @@ namespace _2DPlatformerRobot.Manager
                     }
                 }
             }
+            if(score != null)
+                score.Draw(spriteBatch);
+            if (health != null)
+                health.Draw(spriteBatch);
         }
     }
 }

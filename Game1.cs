@@ -22,7 +22,6 @@ namespace _2DPlatformerRobot
         public string[] levels = { "../../../Content/Level/level1.txt",
                             "../../../Content/Level/level2.txt"};
         public LevelManager levelManager;
-        public Score score;
         public int currentLevel = 0;
 
         public Game1()
@@ -39,7 +38,6 @@ namespace _2DPlatformerRobot
         {
             // TODO: Add your initialization logic here
             levelManager = new LevelManager(this, levels);
-            score = new Score(this);
 
             base.Initialize();
         }
@@ -56,22 +54,31 @@ namespace _2DPlatformerRobot
         {
             // TODO: Add your update logic here
             km.Update();
+            if (currentLevel == 2)
+                Exit();
             if (km.IsKeyPressed(Keys.R))
                 Initialize();
             if (km.IsKeyPressed(Keys.Escape))
                 Exit();
             player.Update(gameTime);
+            levelManager.UnloadTexture();
             if (levelManager.NextLevel())
             {
                 currentLevel++;
                 Initialize();
             }
-            levelManager.UnloadTexture();
+
+            if (Robot._instance.IsGameOver())
+            {
+                currentLevel = 0;
+                Robot._instance.health = 3;
+                Initialize();
+            }
 
             base.Update(gameTime);
         }
 
-        public void IsDead() =>  Initialize();
+        public void IsDead() => Initialize();
 
         protected override void Draw(GameTime gameTime)
         {
@@ -79,7 +86,6 @@ namespace _2DPlatformerRobot
             GraphicsDevice.Clear(Color.MediumPurple);
             spriteBatch.Begin();
             levelManager.Draw(spriteBatch);
-            score.Draw(spriteBatch);
             player.Draw(spriteBatch);
             spriteBatch.End();
 

@@ -30,6 +30,7 @@ namespace _2DPlatformerRobot.Models
         public List<Coins> coins;
         public int points = 0;
         public int tileSize = 64;
+        public int health = 3;
 
         //Jump
         public bool isOnGround = true;
@@ -79,7 +80,7 @@ namespace _2DPlatformerRobot.Models
 
             if (game.km.IsKeyPressed(Keys.Space) && (isOnGround || nJumps < 2))
             {
-                velocity += new Vector2(velocity.X, -30f);
+                velocity += new Vector2(velocity.X, -40f);
                 nJumps++;
                 isOnGround = false;
             }
@@ -104,7 +105,11 @@ namespace _2DPlatformerRobot.Models
 
             if (CoinPickUp(coins))
                 points++;
-
+        }
+        public bool IsGameOver()
+        {
+            if (health == 0) return true;
+            else return false;
         }
 
         public bool CanMove(List<Wall> walls)
@@ -127,7 +132,10 @@ namespace _2DPlatformerRobot.Models
             foreach (var lava in lavas)
             {
                 if (lava.IsColliding(futurePos))
+                {
+                    health--;
                     return true;
+                }
             }
             return false;
         }
