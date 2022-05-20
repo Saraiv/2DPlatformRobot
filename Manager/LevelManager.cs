@@ -1,6 +1,7 @@
 ﻿using _2DPlatformerRobot.Models;
 using _2DPlatformerRobot.UI;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -15,6 +16,7 @@ namespace _2DPlatformerRobot.Manager
         Game1 game;
         public Score score;
         public Health health;
+        public SoundEffect levelCompleted;
         public Texture2D wallTexture, lavaTexture, coinTexture;
         public List<Wall> walls;
         public List<Lava> lavas;
@@ -89,17 +91,19 @@ namespace _2DPlatformerRobot.Manager
         {
             if (Robot._instance.points == 5)
             {
-                game.currentLevel++;
+                levelCompleted.Play();
                 return true;
-            } 
+            }
             else return false;
         }
+
 
         public void LoadLevelTextures()
         {
             wallTexture = game.Content.Load<Texture2D>("Sprites/Wall");
             lavaTexture = game.Content.Load<Texture2D>("Sprites/Lava");
             coinTexture = game.Content.Load<Texture2D>("Sprites/Coin");
+            levelCompleted = game.Content.Load<SoundEffect>("Audio/LevelCompleted");
         }
 
         public void UnloadTexture()
@@ -149,7 +153,7 @@ namespace _2DPlatformerRobot.Manager
                     }
                 }
             }
-            if(score != null)
+            if (score != null)
                 score.Draw(spriteBatch);
             if (health != null)
                 health.Draw(spriteBatch);

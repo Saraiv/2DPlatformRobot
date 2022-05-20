@@ -27,11 +27,8 @@ P:\Escola\SegundoSemestre\Jogos\2DPlatformerRobot\obj\Debug\netcoreapp3.1\2DPlat
 P:\Escola\SegundoSemestre\Jogos\2DPlatformerRobot\obj\Debug\netcoreapp3.1\2DPlatformerRobot.pdb
 P:\Escola\SegundoSemestre\Jogos\2DPlatformerRobot\obj\Debug\netcoreapp3.1\2DPlatformerRobot.genruntimeconfig.cache
 P:\Escola\SegundoSemestre\Jogos\2DPlatformerRobot\bin\Debug\netcoreapp3.1\Content\backgroundFactory.xnb
-P:\Escola\SegundoSemestre\Jogos\2DPlatformerRobot\bin\Debug\netcoreapp3.1\Content\Sprites\Grass.xnb
 P:\Escola\SegundoSemestre\Jogos\2DPlatformerRobot\bin\Debug\netcoreapp3.1\Content\Sprites\robot.xnb
-P:\Escola\SegundoSemestre\Jogos\2DPlatformerRobot\bin\Debug\netcoreapp3.1\Content\Sprites\backgroundFactory.xnb
 P:\Escola\SegundoSemestre\Jogos\2DPlatformerRobot\bin\Debug\netcoreapp3.1\Content\Sprites\gear.xnb
-P:\Escola\SegundoSemestre\Jogos\2DPlatformerRobot\bin\Debug\netcoreapp3.1\Content\Sprites\pngdb-coins-sprite-animation-2d-computer-graphics-coin-opengameart-org-png-iVSwgdcuJ7B9jp1Zsk16Ebxzg_t.xnb
 P:\Escola\SegundoSemestre\Jogos\2DPlatformerRobot\bin\Debug\netcoreapp3.1\Content\Sprites\robot-idle.xnb
 P:\Escola\SegundoSemestre\Jogos\2DPlatformerRobot\bin\Debug\netcoreapp3.1\Content\Sprites\robot-preview.xnb
 P:\Escola\SegundoSemestre\Jogos\2DPlatformerRobot\bin\Debug\netcoreapp3.1\Content\Sprites\robot-run.xnb
@@ -41,3 +38,11 @@ P:\Escola\SegundoSemestre\Jogos\2DPlatformerRobot\bin\Debug\netcoreapp3.1\Conten
 P:\Escola\SegundoSemestre\Jogos\2DPlatformerRobot\bin\Debug\netcoreapp3.1\Content\Sprites\Lava.xnb
 P:\Escola\SegundoSemestre\Jogos\2DPlatformerRobot\bin\Debug\netcoreapp3.1\Content\Fonts\Score.xnb
 P:\Escola\SegundoSemestre\Jogos\2DPlatformerRobot\bin\Debug\netcoreapp3.1\Content\Sprites\coin.xnb
+P:\Escola\SegundoSemestre\Jogos\2DPlatformerRobot\bin\Debug\netcoreapp3.1\Content\Audio\CollectCoin.ogg
+P:\Escola\SegundoSemestre\Jogos\2DPlatformerRobot\bin\Debug\netcoreapp3.1\Content\Audio\CollectCoin.xnb
+P:\Escola\SegundoSemestre\Jogos\2DPlatformerRobot\bin\Debug\netcoreapp3.1\Content\Audio\Dead.ogg
+P:\Escola\SegundoSemestre\Jogos\2DPlatformerRobot\bin\Debug\netcoreapp3.1\Content\Audio\Dead.xnb
+P:\Escola\SegundoSemestre\Jogos\2DPlatformerRobot\bin\Debug\netcoreapp3.1\Content\Audio\Jump.ogg
+P:\Escola\SegundoSemestre\Jogos\2DPlatformerRobot\bin\Debug\netcoreapp3.1\Content\Audio\Jump.xnb
+P:\Escola\SegundoSemestre\Jogos\2DPlatformerRobot\bin\Debug\netcoreapp3.1\Content\Audio\LevelCompleted.ogg
+P:\Escola\SegundoSemestre\Jogos\2DPlatformerRobot\bin\Debug\netcoreapp3.1\Content\Audio\LevelCompleted.xnb

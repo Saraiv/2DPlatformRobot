@@ -4,17 +4,19 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
+    <File>P:/Escola/SegundoSemestre/Jogos/2DPlatformerRobot/Content/Audio/CollectCoin.ogg</File>
+    <File>P:/Escola/SegundoSemestre/Jogos/2DPlatformerRobot/Content/Audio/Dead.ogg</File>
+    <File>P:/Escola/SegundoSemestre/Jogos/2DPlatformerRobot/Content/Audio/Jump.ogg</File>
+    <File>P:/Escola/SegundoSemestre/Jogos/2DPlatformerRobot/Content/Audio/LevelCompleted.ogg</File>
     <File>P:/Escola/SegundoSemestre/Jogos/2DPlatformerRobot/Content/Fonts/Score.spritefont</File>
-    <File>P:/Escola/SegundoSemestre/Jogos/2DPlatformerRobot/Content/Sprites/backgroundFactory.jpg</File>
     <File>P:/Escola/SegundoSemestre/Jogos/2DPlatformerRobot/Content/Sprites/coin.png</File>
-    <File>P:/Escola/SegundoSemestre/Jogos/2DPlatformerRobot/Content/Sprites/Grass.png</File>
     <File>P:/Escola/SegundoSemestre/Jogos/2DPlatformerRobot/Content/Sprites/Lava.png</File>
-    <File>P:/Escola/SegundoSemestre/Jogos/2DPlatformerRobot/Content/Sprites/pngdb-coins-sprite-animation-2d-computer-graphics-coin-opengameart-org-png-iVSwgdcuJ7B9jp1Zsk16Ebxzg_t.jpg</File>
     <File>P:/Escola/SegundoSemestre/Jogos/2DPlatformerRobot/Content/Sprites/robotLeft.png</File>
     <File>P:/Escola/SegundoSemestre/Jogos/2DPlatformerRobot/Content/Sprites/robotRight.png</File>
     <File>P:/Escola/SegundoSemestre/Jogos/2DPlatformerRobot/Content/Sprites/Wall.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

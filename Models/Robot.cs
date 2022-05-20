@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using System;
 using _2DPlatformerRobot.Manager;
+using Microsoft.Xna.Framework.Audio;
 
 namespace _2DPlatformerRobot.Models
 {
@@ -16,7 +17,9 @@ namespace _2DPlatformerRobot.Models
             Falling,
             Standing
         }
-
+        private SoundEffect jump;
+        private SoundEffect dead;
+        private SoundEffect collectCoin;
         private Texture2D robotTexture;
         private Vector2 futurePos;
         public static Robot _instance;
@@ -35,11 +38,11 @@ namespace _2DPlatformerRobot.Models
         //Jump
         public bool isOnGround = true;
         public int nJumps = 0;
-        
+
 
         public Robot(Game1 game)
         {
-            if(_instance != null) throw new Exception("Player called twice");
+            if (_instance != null) throw new Exception("Player called twice");
             _instance = this;
             this.game = game;
             playerState = RobotState.Standing;
@@ -51,6 +54,9 @@ namespace _2DPlatformerRobot.Models
         public void LoadTexture()
         {
             robotTexture = game.Content.Load<Texture2D>("Sprites/robotRight");
+            jump = game.Content.Load<SoundEffect>("Audio/Jump");
+            dead = game.Content.Load<SoundEffect>("Audio/Dead");
+            collectCoin = game.Content.Load<SoundEffect>("Audio/CollectCoin");
         }
 
         public void SetPlayerPos(Vector2 startingPos)
@@ -80,7 +86,8 @@ namespace _2DPlatformerRobot.Models
 
             if (game.km.IsKeyPressed(Keys.Space) && (isOnGround || nJumps < 2))
             {
-                velocity += new Vector2(velocity.X, -40f);
+                jump.Play();
+                velocity += new Vector2(velocity.X, -30f);
                 nJumps++;
                 isOnGround = false;
             }
@@ -105,7 +112,9 @@ namespace _2DPlatformerRobot.Models
 
             if (CoinPickUp(coins))
                 points++;
+
         }
+
         public bool IsGameOver()
         {
             if (health == 0) return true;
@@ -115,7 +124,7 @@ namespace _2DPlatformerRobot.Models
         public bool CanMove(List<Wall> walls)
         {
             if (walls == null) return true;
-            foreach(var wall in walls)
+            foreach (var wall in walls)
             {
                 if (wall.IsColliding(futurePos))
                 {
@@ -134,6 +143,7 @@ namespace _2DPlatformerRobot.Models
                 if (lava.IsColliding(futurePos))
                 {
                     health--;
+                    dead.Play();
                     return true;
                 }
             }
@@ -143,11 +153,12 @@ namespace _2DPlatformerRobot.Models
         public bool CoinPickUp(List<Coins> coins)
         {
             if (coins == null) return false;
-            foreach(var coin in coins)
+            foreach (var coin in coins)
             {
                 if (coin.IsColliding(futurePos))
                 {
                     game.levelManager.map[(int)coin.position.X / tileSize, (int)coin.position.Y / tileSize] = ' ';
+                    collectCoin.Play();
                     return true;
                 }
             }

@@ -13,24 +13,36 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin Audio/CollectCoin.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/CollectCoin.ogg
+
+#begin Audio/Dead.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/Dead.ogg
+
+#begin Audio/Jump.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/Jump.ogg
+
+#begin Audio/LevelCompleted.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/LevelCompleted.ogg
+
 #begin Fonts/Score.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
 /build:Fonts/Score.spritefont
-
-#begin Sprites/backgroundFactory.jpg
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Sprites/backgroundFactory.jpg
 
 #begin Sprites/coin.png
 /importer:TextureImporter
@@ -44,18 +56,6 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/coin.png
 
-#begin Sprites/Grass.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Sprites/Grass.png
-
 #begin Sprites/Lava.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -67,18 +67,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Sprites/Lava.png
-
-#begin Sprites/pngdb-coins-sprite-animation-2d-computer-graphics-coin-opengameart-org-png-iVSwgdcuJ7B9jp1Zsk16Ebxzg_t.jpg
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Sprites/pngdb-coins-sprite-animation-2d-computer-graphics-coin-opengameart-org-png-iVSwgdcuJ7B9jp1Zsk16Ebxzg_t.jpg
 
 #begin Sprites/robotLeft.png
 /importer:TextureImporter
