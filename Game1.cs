@@ -20,7 +20,8 @@ namespace _2DPlatformerRobot
 
         //map
         public string[] levels = { "../../../Content/Level/level1.txt",
-                            "../../../Content/Level/level2.txt"};
+                            "../../../Content/Level/level2.txt",
+                            "../../../Content/Level/level3.txt"};
         public LevelManager levelManager;
         public Score score;
         public int currentLevel = 0;
