@@ -11,12 +11,6 @@ namespace _2DPlatformerRobot.Models
     class Robot
     {
         private Game1 game;
-        public enum RobotState
-        {
-            Jumping,
-            Falling,
-            Standing
-        }
         private SoundEffect jump;
         private SoundEffect dead;
         private SoundEffect collectCoin;
@@ -27,7 +21,6 @@ namespace _2DPlatformerRobot.Models
         public Vector2 position;
         public float speed = 3f;
         public float gravity = 2f;
-        public RobotState playerState;
         public List<Wall> walls;
         public List<Lava> lavas;
         public List<Coins> coins;
@@ -45,7 +38,6 @@ namespace _2DPlatformerRobot.Models
             if (_instance != null) throw new Exception("Player called twice");
             _instance = this;
             this.game = game;
-            playerState = RobotState.Standing;
             isOnGround = true;
 
             position = Vector2.Zero;
@@ -62,7 +54,6 @@ namespace _2DPlatformerRobot.Models
         public void SetPlayerPos(Vector2 startingPos)
         {
             position = startingPos;
-            playerState = RobotState.Standing;
             isOnGround = true;
         }
 

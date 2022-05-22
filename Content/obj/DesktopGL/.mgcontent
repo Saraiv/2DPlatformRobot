@@ -13,9 +13,11 @@
     <File>P:/Escola/SegundoSemestre/Jogos/2DPlatformerRobot/Content/Sprites/Lava.png</File>
     <File>P:/Escola/SegundoSemestre/Jogos/2DPlatformerRobot/Content/Sprites/robotLeft.png</File>
     <File>P:/Escola/SegundoSemestre/Jogos/2DPlatformerRobot/Content/Sprites/robotRight.png</File>
+    <File>P:/Escola/SegundoSemestre/Jogos/2DPlatformerRobot/Content/Sprites/StartButton.png</File>
     <File>P:/Escola/SegundoSemestre/Jogos/2DPlatformerRobot/Content/Sprites/Wall.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

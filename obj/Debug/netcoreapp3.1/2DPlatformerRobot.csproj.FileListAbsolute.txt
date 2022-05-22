@@ -46,3 +46,4 @@ P:\Escola\SegundoSemestre\Jogos\2DPlatformerRobot\bin\Debug\netcoreapp3.1\Conten
 P:\Escola\SegundoSemestre\Jogos\2DPlatformerRobot\bin\Debug\netcoreapp3.1\Content\Audio\Jump.xnb
 P:\Escola\SegundoSemestre\Jogos\2DPlatformerRobot\bin\Debug\netcoreapp3.1\Content\Audio\LevelCompleted.ogg
 P:\Escola\SegundoSemestre\Jogos\2DPlatformerRobot\bin\Debug\netcoreapp3.1\Content\Audio\LevelCompleted.xnb
+P:\Escola\SegundoSemestre\Jogos\2DPlatformerRobot\bin\Debug\netcoreapp3.1\Content\Sprites\StartButton.xnb

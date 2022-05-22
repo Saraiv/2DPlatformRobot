@@ -15,10 +15,21 @@ namespace _2DPlatformerRobot
         public SpriteBatch spriteBatch;
         public KeyboardManager km;
 
-        //robot
+        enum GameState
+        {
+            MainMenu,
+            Playing
+        }
+
+        GameState CurrentGameState = GameState.MainMenu;
+
+        //Robot
         Robot player;
 
-        //map
+        //Button
+        Button button;
+
+        //Map
         public string[] levels = { "../../../Content/Level/level1.txt",
                             "../../../Content/Level/level2.txt",
                             "../../../Content/Level/level3.txt"};
@@ -39,6 +50,7 @@ namespace _2DPlatformerRobot
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            button = new Button(this);
             levelManager = new LevelManager(this, levels);
             score = new Score(this);
 
@@ -49,6 +61,8 @@ namespace _2DPlatformerRobot
         {
             // TODO: use this.Content to load your game content here
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            IsMouseVisible = true;
+            button.SetPosition(new Vector2(300, 250));
             levelManager.LoadLevelTextures();
             player.LoadTexture();
         }
@@ -56,29 +70,53 @@ namespace _2DPlatformerRobot
         protected override void Update(GameTime gameTime)
         {
             // TODO: Add your update logic here
-            km.Update();
-            if (currentLevel == 2)
-                Exit();
-            if (km.IsKeyPressed(Keys.R))
-                Initialize();
-            if (km.IsKeyPressed(Keys.Escape))
-                Exit();
+            MouseState mouse = Mouse.GetState();
 
-            player.Update(gameTime);
-
-            levelManager.UnloadTexture();
-
-            if (Robot._instance.IsGameOver())
+            switch (CurrentGameState)
             {
-                currentLevel = 0;
-                Robot._instance.health = 3;
-                Initialize();
-            }
+                case GameState.MainMenu:
+                    currentLevel = 0;
+                    Robot._instance.points = 0;
+                    Robot._instance.health = 3;
+                    button.Update(mouse);
+                    if (button.isClicked == true)
+                    {
+                        Initialize();
+                        CurrentGameState = GameState.Playing;
+                    }
+                    break;
 
-            if (levelManager.NextLevel())
-            {
-                currentLevel++;
-                Initialize();
+                case GameState.Playing:
+                    km.Update();
+                    if (currentLevel == 2)
+                        CurrentGameState = GameState.MainMenu;
+                    if (km.IsKeyPressed(Keys.R))
+                    {
+                        currentLevel = 0;
+                        Initialize();
+                    }
+                    if (km.IsKeyPressed(Keys.Escape))
+                        CurrentGameState = GameState.MainMenu;
+
+                    player.Update(gameTime);
+
+                    levelManager.UnloadTexture();
+
+                    if (Robot._instance.IsGameOver())
+                    {
+                        currentLevel = 0;
+                        Robot._instance.health = 3;
+                        CurrentGameState = GameState.MainMenu;
+                    }
+
+                    if (levelManager.NextLevel())
+                    {
+                        currentLevel++;
+                        Initialize();
+                    }
+                    break;
+                default:
+                    break;
             }
 
             base.Update(gameTime);
@@ -91,9 +129,20 @@ namespace _2DPlatformerRobot
             // TODO: Add your drawing code here
             GraphicsDevice.Clear(Color.MediumPurple);
             spriteBatch.Begin();
-            levelManager.Draw(spriteBatch);
-            score.Draw(spriteBatch);
-            player.Draw(spriteBatch);
+            switch (CurrentGameState)
+            {
+                case GameState.MainMenu:
+                    button.Draw(spriteBatch);
+                    break;
+
+                case GameState.Playing:
+                    levelManager.Draw(spriteBatch);
+                    score.Draw(spriteBatch);
+                    player.Draw(spriteBatch);
+                    break;
+                default:
+                    break;
+            }
             spriteBatch.End();
 
             base.Draw(gameTime);
