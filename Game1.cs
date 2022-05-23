@@ -7,6 +7,14 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 
+//REFERENCIAS E CÓDIGO RETIRADO E ALTERADO
+// https://www.youtube.com/watch?v=54L_w0PiRa8
+// https://github.com/ECMiraldo/DiamondMiner/tree/master/DiamondMiner
+// https://github.com/ECMiraldo/Tower2/tree/master/Tower2
+// https://www.youtube.com/watch?v=CV8P9aq2gQo
+// https://www.youtube.com/watch?v=RMmo3SktDJo&t=482s
+// https://www.youtube.com/watch?v=ZLxIShw-7ac&t=115s
+
 namespace _2DPlatformerRobot
 {
     public class Game1 : Game
